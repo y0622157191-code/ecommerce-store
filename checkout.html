@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Checkout</h1>
+    <form id="payment-form">
+        <h2>Payment Information</h2>
+        <label for="card-number">Card Number:</label><br>
+        <input type="text" id="card-number" name="card-number" required><br>
+
+        <label for="expiry-date">Expiry Date:</label><br>
+        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required><br>
+
+        <label for="cvv">CVV:</label><br>
+        <input type="text" id="cvv" name="cvv" required><br><br>
+
+        <input type="submit" value="Pay Now">
+    </form>
+
+    <h2>Order Summary</h2>
+    <div id="order-summary">
+        <p><strong>Item:</strong> Example Product</p>
+        <p><strong>Quantity:</strong> 1</p>
+        <p><strong>Price:</strong> $29.99</p>
+        <p><strong>Total:</strong> $29.99</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
