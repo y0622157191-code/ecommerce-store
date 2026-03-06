@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .product { border: 1px solid #ccc; margin: 10px; padding: 10px; display: inline-block; width: 200px; }
+        #search { margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Product Catalog</h1>
+    <input type="text" id="search" placeholder="Search for products..." />
+    <div id="filters">
+        <h2>Filters</h2>
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="all">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="clothing">Clothing</option>
+            <option value="accessories">Accessories</option>
+        </select>
+        <label for="price">Price:</label>
+        <input type="number" id="min-price" placeholder="Min Price" /><br/>
+        <input type="number" id="max-price" placeholder="Max Price" />
+    </div>
+    <div id="product-list">
+        <div class="product" data-category="electronics" data-price="299">
+            <h3>Smartphone</h3>
+            <p>Price: $299</p>
+        </div>
+        <div class="product" data-category="clothing" data-price="49">
+            <h3>T-shirt</h3>
+            <p>Price: $49</p>
+        </div>
+        <div class="product" data-category="accessories" data-price="19">
+            <h3>Wristband</h3>
+            <p>Price: $19</p>
+        </div>
+        <!-- Additional products can be added here -->
+    </div>
+    <script>
+        document.getElementById('search').addEventListener('keyup', function() {
+            let searchValue = this.value.toLowerCase();
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                let title = product.querySelector('h3').innerText.toLowerCase();
+                product.style.display = title.includes(searchValue) ? '' : 'none';
+            });
+        });
+        document.getElementById('category').addEventListener('change', function() {
+            let selectedCategory = this.value;
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                let productCategory = product.getAttribute('data-category');
+                product.style.display = selectedCategory === 'all' || productCategory === selectedCategory ? '' : 'none';
+            });
+        });
+        document.getElementById('min-price').addEventListener('input', filterByPrice);
+        document.getElementById('max-price').addEventListener('input', filterByPrice);
+        function filterByPrice() {
+            let minPrice = parseFloat(document.getElementById('min-price').value) || 0;
+            let maxPrice = parseFloat(document.getElementById('max-price').value) || Infinity;
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                let productPrice = parseFloat(product.getAttribute('data-price'));
+                product.style.display = (productPrice >= minPrice && productPrice <= maxPrice) ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
